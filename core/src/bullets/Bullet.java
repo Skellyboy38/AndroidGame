@@ -31,5 +31,10 @@ public abstract class Bullet {
 		return posY;
 	}
 	
+	public void dispose()
+	{
+		texture.dispose();
+	}
+	
 	abstract public void update();
 }

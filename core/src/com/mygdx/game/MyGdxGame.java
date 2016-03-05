@@ -58,6 +58,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			e.update();
 			if(e.getY() < (-1)*e.getHeight())
 			{
+				e.dispose();
 				iter.remove();
 			}
 			else

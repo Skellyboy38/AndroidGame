@@ -50,5 +50,10 @@ public abstract class Enemy {
 		return height;
 	}
 	
+	public void dispose()
+	{
+		texture.dispose();
+	}
+	
 	abstract public void update();
 }
