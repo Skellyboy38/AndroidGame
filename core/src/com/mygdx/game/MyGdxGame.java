@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import Characters.Player;
+import bullets.BulletFactory;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -13,11 +14,13 @@ public class MyGdxGame extends ApplicationAdapter {
 	
 	SpriteBatch batch;
 	Player player;
+	BulletFactory bulletFactory;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		player = new Player(batch);
+		bulletFactory = new BulletFactory();
+		player = new Player(batch, bulletFactory);
 	}
 
 	@Override
