@@ -15,6 +15,7 @@ public class DefaultBullet extends Bullet {
 	public void update()
 	{
 		posY += SPEED;
+		updateCollisionBox(SPEED);
 	}
 	
 }

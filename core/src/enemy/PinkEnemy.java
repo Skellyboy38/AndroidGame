@@ -16,5 +16,6 @@ public class PinkEnemy extends Enemy {
 	public void update()
 	{
 		posY -= SPEED;
+		updateCollisionBox(SPEED);
 	}
 }

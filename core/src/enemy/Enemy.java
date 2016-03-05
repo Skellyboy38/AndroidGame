@@ -1,6 +1,7 @@
 package enemy;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Enemy {
 	protected int posX;
@@ -8,6 +9,7 @@ public abstract class Enemy {
 	
 	private Texture texture;
 	private int hp;
+	protected Rectangle collisionBox;
 	
 	private int height;
 	
@@ -18,11 +20,17 @@ public abstract class Enemy {
 		this.posY = posY;
 		this.hp = hp;
 		height = texture.getHeight();
+		collisionBox = new Rectangle(posX, posY, texture.getWidth(), height);
 	}
 	
 	public Texture getTexture()
 	{
 		return texture;
+	}
+	
+	public Rectangle getCollisionBox()
+	{
+		return collisionBox;
 	}
 	
 	public int getX()
@@ -53,6 +61,11 @@ public abstract class Enemy {
 	public void dispose()
 	{
 		texture.dispose();
+	}
+	
+	public void updateCollisionBox(int speed)
+	{
+		collisionBox.setHeight(collisionBox.getHeight() - speed);
 	}
 	
 	abstract public void update();

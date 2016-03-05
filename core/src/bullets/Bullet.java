@@ -1,11 +1,13 @@
 package bullets;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Bullet {
 	
 	protected int posX;
 	protected int posY;
+	protected Rectangle collisionBox;
 	
 	private Texture texture;
 	
@@ -14,6 +16,7 @@ public abstract class Bullet {
 		this.texture = texture;
 		this.posX = posX;
 		this.posY = posY;
+		collisionBox = new Rectangle(posX, posY, texture.getWidth(), texture.getHeight());
 	}
 	
 	public Texture getTexture()
@@ -34,6 +37,16 @@ public abstract class Bullet {
 	public void dispose()
 	{
 		texture.dispose();
+	}
+	
+	public void updateCollisionBox(int speed)
+	{
+		collisionBox.setHeight(collisionBox.getHeight() - speed);
+	}
+	
+	public Rectangle getCollisionBox()
+	{
+		return collisionBox;
 	}
 	
 	abstract public void update();
