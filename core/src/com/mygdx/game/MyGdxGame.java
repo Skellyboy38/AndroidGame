@@ -17,7 +17,7 @@ import enemy.EnemyFactory;
 public class MyGdxGame extends ApplicationAdapter {
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 560;
-	public static final int SPAWN_DELAY = 5;
+	public static final int SPAWN_DELAY = 2;
 
 	float elapsedTime;
 	boolean canSpawnEnemy;
@@ -56,7 +56,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		{
 			Enemy e = iter.next();
 			e.update();
-			if(e.getY() < 0)
+			if(e.getY() < (-1)*e.getHeight())
 			{
 				iter.remove();
 			}
@@ -74,7 +74,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		elapsedTime += Gdx.graphics.getDeltaTime();
 		if(elapsedTime >= SPAWN_DELAY)
 		{
-			Enemy e = enemyFactory.createEnemy("pink");
+			Enemy e = enemyFactory.createEnemy();
 			enemies.add(e);
 			elapsedTime = 0;
 		}

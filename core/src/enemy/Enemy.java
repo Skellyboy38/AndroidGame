@@ -9,12 +9,15 @@ public abstract class Enemy {
 	private Texture texture;
 	private int hp;
 	
+	private int height;
+	
 	public Enemy(Texture texture, int posX, int posY, int hp)
 	{
 		this.texture = texture;
 		this.posX = posX;
 		this.posY = posY;
 		this.hp = hp;
+		height = texture.getHeight();
 	}
 	
 	public Texture getTexture()
@@ -40,6 +43,11 @@ public abstract class Enemy {
 	public boolean isDead()
 	{
 		return hp == 0;
+	}
+	
+	public int getHeight()
+	{
+		return height;
 	}
 	
 	abstract public void update();
