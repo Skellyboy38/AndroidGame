@@ -17,7 +17,7 @@ public class Player {
 	public static final int LEFT_KEY = 21;
 	public static final int RIGHT_KEY = 22;
 
-	public static final int SPEED = 3;
+	public static final int SPEED = 4;
 	public static final int START_HEIGHT = 100;
 
 	public static final float BULLET_DELAY = 0.1f;
@@ -150,5 +150,10 @@ public class Player {
 		collisionBox.setY(posY);
 		
 		isDead = false;
+	}
+	
+	public void powerUp(String type)
+	{
+		
 	}
 }

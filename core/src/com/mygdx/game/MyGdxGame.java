@@ -2,7 +2,10 @@ package com.mygdx.game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
+import powerUps.PowerUp;
+import powerUps.PowerUpFactory;
 import score.Score;
 import numbers.HpNumbers;
 import Characters.Player;
@@ -22,20 +25,26 @@ public class MyGdxGame extends ApplicationAdapter {
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 560;
 	public static final int SPAWN_DELAY = 1;
+	public static final double POWER_UP_CHANCE = 0.5;
 
 	float elapsedTime;
 	boolean canSpawnEnemy;
 	HpNumbers hp;
+	Random random;
+	double powerUpChance;
 
 	SpriteBatch batch;
 	BitmapFont font;
 	Player player;
 	BulletFactory bulletFactory;
 	EnemyFactory enemyFactory;
+	PowerUpFactory powerUpFactory;
+	
 	CollisionDetector collisions;
 	Score score;
 
 	ArrayList<Enemy> enemies;
+	ArrayList<PowerUp> powerUps;
 
 	@Override
 	public void create () {
@@ -43,12 +52,17 @@ public class MyGdxGame extends ApplicationAdapter {
 		font = new BitmapFont();
 		font.setColor(1,1,1,1);
 		font.setScale(2);
+		random = new Random();
+		
 		bulletFactory = new BulletFactory();
 		enemyFactory = new EnemyFactory();
+		powerUpFactory = new PowerUpFactory();
+		
 		player = new Player(batch, bulletFactory);
 		enemies = new ArrayList<Enemy>();
+		powerUps = new ArrayList<PowerUp>();
 		score = new Score();
-		collisions = new CollisionDetector(player, enemies);
+		collisions = new CollisionDetector(player, enemies, powerUps);
 		hp = new HpNumbers();
 
 		canSpawnEnemy = true;
@@ -81,6 +95,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				}
 				else if(e.isDead())
 				{
+					spawnPowerUp(e.getX(), e.getY());
 					e.dispose();
 					iter.remove();
 					score.increaseScore(e.getPoints());
@@ -89,6 +104,22 @@ public class MyGdxGame extends ApplicationAdapter {
 				{
 					batch.draw(e.getTexture(), e.getX(), e.getY());
 					batch.draw(hp.getHp()[e.getHp()], e.getX(), e.getY());
+				}
+			}
+			
+			Iterator<PowerUp> iter2 = powerUps.iterator();
+			while(iter2.hasNext())
+			{
+				PowerUp p = iter2.next();
+				p.update();
+				if(p.getY() < (-1)*p.getHeight())
+				{
+					p.dispose();
+					iter2.remove();
+				}
+				else 
+				{
+					batch.draw(p.getTexture(), p.getX(), p.getY());
 				}
 			}
 
@@ -112,6 +143,15 @@ public class MyGdxGame extends ApplicationAdapter {
 			elapsedTime = 0;
 		}
 	}
+	
+	public void spawnPowerUp(int posX, int posY)
+	{
+		powerUpChance = random.nextDouble();
+		if(powerUpChance > POWER_UP_CHANCE)
+		{
+			powerUps.add(powerUpFactory.createPowerUp(posX, posY));
+		}
+	}
 
 	public void endGame()
 	{
@@ -132,5 +172,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		score.restart();
 		player.restart();
 		enemies.clear();
+		powerUps.clear();
 	}
 }

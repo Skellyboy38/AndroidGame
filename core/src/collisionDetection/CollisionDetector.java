@@ -2,6 +2,8 @@ package collisionDetection;
 
 import java.util.ArrayList;
 
+import powerUps.PowerUp;
+
 import com.badlogic.gdx.math.Intersector;
 
 import bullets.Bullet;
@@ -13,18 +15,30 @@ public class CollisionDetector {
 	private Player player;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Bullet> bullets;
+	private ArrayList<PowerUp> powerUps;
 
-	public CollisionDetector(Player player, ArrayList<Enemy> enemies)
+	public CollisionDetector(Player player, ArrayList<Enemy> enemies, ArrayList<PowerUp> powerUps)
 	{
 		this.player = player;
 		this.enemies = enemies;
 		this.bullets = player.getBullets();
+		this.powerUps = powerUps;
 	}
 
 	public void update()
 	{
 		characterCollision();
 		bulletCollisions();
+		powerUpCollisions();
+	}
+	
+	public void powerUpCollisions()
+	{
+		for(PowerUp p : powerUps)
+		{
+			if(Intersector.overlaps(p.getCollisionBox(), player.getCollisionBox()));
+			player.powerUp(p.getType());
+		}
 	}
 
 	public void characterCollision()
