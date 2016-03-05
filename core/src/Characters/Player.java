@@ -19,7 +19,10 @@ public class Player {
 	public static final int SPEED = 3;
 	public static final int START_HEIGHT = 100;
 	
-	public static final float BULLET_SPAWN_TIME = 0.5f;
+	public static final float BULLET_DELAY = 0.5f;
+	
+	private boolean canSpawnBullet;
+	private float elapsedTime;
 	
 	private Texture texture;
 	private SpriteBatch batch;
@@ -44,10 +47,15 @@ public class Player {
 		posY = START_HEIGHT;
 		bullets = new ArrayList<Bullet>();
 		bulletType = "default";
+		canSpawnBullet = true;
+		elapsedTime = 0f;
 	}
 	
 	public void update()
 	{
+		elapsedTime += Gdx.graphics.getDeltaTime();
+		enableBullet();
+		
 		if(Gdx.input.isKeyPressed(LEFT_KEY) && posX > 0)
 		{
 			posX -= SPEED;
@@ -56,9 +64,10 @@ public class Player {
 		{
 			posX += SPEED;
 		}
-		if(Gdx.input.isKeyPressed(LEFT_KEY) && Gdx.input.isKeyPressed(RIGHT_KEY))
+		if(Gdx.input.isKeyPressed(LEFT_KEY) && Gdx.input.isKeyPressed(RIGHT_KEY) && canSpawnBullet)
 		{
 			spawnBullet(posX + characterWidth/2, posY + characterHeight);
+			canSpawnBullet = false;
 		}
 		
 		Iterator<Bullet> iter = bullets.iterator();
@@ -85,6 +94,15 @@ public class Player {
 		for(Bullet b : bullets)
 		{
 			batch.draw(b.getTexture(), b.getX(), b.getY());
+		}
+	}
+	
+	public void enableBullet()
+	{
+		if(elapsedTime >= BULLET_DELAY)
+		{
+			elapsedTime = 0;
+			canSpawnBullet = true;
 		}
 	}
 	
