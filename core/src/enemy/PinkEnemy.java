@@ -5,11 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 public class PinkEnemy extends Enemy {
 
 	public static final int SPEED = 3;
-	public static final int HP = 2;
+	public static final int HP = 8;
 
-	public PinkEnemy(Texture texture, int posX, int posY) 
+	public PinkEnemy(Texture texture, Texture hit, int posX, int posY) 
 	{
-		super(texture, posX, posY, HP);
+		super(texture, hit, posX, posY, HP);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class DefaultBullet extends Bullet {
 	
-	public static final int SPEED = 3;
+	public static final int SPEED = 5;
 	
 	public DefaultBullet(Texture texture, int posX, int posY) 
 	{

@@ -83,7 +83,7 @@ public class Player {
 		{
 			Bullet b = iter.next();
 			b.update();
-			if(b.getY() > MyGdxGame.HEIGHT)
+			if(b.getY() > MyGdxGame.HEIGHT || b.shouldKill())
 			{
 				b.dispose();
 				iter.remove();

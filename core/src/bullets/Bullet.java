@@ -9,6 +9,7 @@ public abstract class Bullet {
 	protected int posY;
 	protected Rectangle collisionBox;
 	
+	private boolean kill;
 	private Texture texture;
 	
 	public Bullet(Texture texture, int posX, int posY)
@@ -16,7 +17,18 @@ public abstract class Bullet {
 		this.texture = texture;
 		this.posX = posX;
 		this.posY = posY;
+		kill = false;
 		collisionBox = new Rectangle(posX, posY, texture.getWidth(), texture.getHeight());
+	}
+	
+	public void kill()
+	{
+		kill = true;
+	}
+	
+	public boolean shouldKill()
+	{
+		return kill;
 	}
 	
 	public Texture getTexture()
@@ -41,7 +53,7 @@ public abstract class Bullet {
 	
 	public void updateCollisionBox(int speed)
 	{
-		collisionBox.setY(collisionBox.getY() - speed);
+		collisionBox.setY(collisionBox.getY() + speed);
 	}
 	
 	public Rectangle getCollisionBox()

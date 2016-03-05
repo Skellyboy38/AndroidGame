@@ -3,6 +3,7 @@ package com.mygdx.game;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import numbers.HpNumbers;
 import Characters.Player;
 import bullets.BulletFactory;
 import collisionDetection.CollisionDetector;
@@ -22,6 +23,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	float elapsedTime;
 	boolean canSpawnEnemy;
+	HpNumbers hp;
 
 	SpriteBatch batch;
 	Player player;
@@ -39,6 +41,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		player = new Player(batch, bulletFactory);
 		enemies = new ArrayList<Enemy>();
 		collisions = new CollisionDetector(player, enemies);
+		hp = new HpNumbers();
 
 		canSpawnEnemy = true;
 		elapsedTime = 0f;
@@ -61,7 +64,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		{
 			Enemy e = iter.next();
 			e.update();
-			if(e.getY() < (-1)*e.getHeight())
+			if(e.getY() < (-1)*e.getHeight() || e.isDead())
 			{
 				e.dispose();
 				iter.remove();
@@ -69,6 +72,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			else
 			{
 				batch.draw(e.getTexture(), e.getX(), e.getY());
+				batch.draw(hp.getHp()[e.getHp()], e.getX(), e.getY());
 			}
 		}
 
