@@ -14,7 +14,7 @@ public class DefaultBullet extends Bullet {
 	@Override
 	public void update()
 	{
-		posY += 3;
+		posY += SPEED;
 	}
 	
 }
