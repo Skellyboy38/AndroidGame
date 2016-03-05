@@ -85,4 +85,5 @@ public abstract class Enemy {
 	}
 
 	abstract public void update();
+	abstract public int getPoints();
 }

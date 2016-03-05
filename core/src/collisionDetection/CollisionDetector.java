@@ -14,15 +14,11 @@ public class CollisionDetector {
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Bullet> bullets;
 
-	private boolean gameOver;
-
 	public CollisionDetector(Player player, ArrayList<Enemy> enemies)
 	{
 		this.player = player;
 		this.enemies = enemies;
 		this.bullets = player.getBullets();
-
-		gameOver = false;
 	}
 
 	public void update()
@@ -37,7 +33,7 @@ public class CollisionDetector {
 		{
 			if(Intersector.overlaps(player.getCollisionBox(), e.getCollisionBox()))
 			{
-				gameOver = true;
+				player.kill();
 			}
 		}
 	}
@@ -55,15 +51,5 @@ public class CollisionDetector {
 				}
 			}
 		}
-	}
-
-	public boolean isGameOver()
-	{
-		return gameOver;
-	}
-
-	public void reset()
-	{
-		gameOver = false;
 	}
 }

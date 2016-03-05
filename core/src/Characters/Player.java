@@ -30,6 +30,7 @@ public class Player {
 	private ArrayList<Bullet> bullets;
 	private String bulletType;
 	private Rectangle collisionBox;
+	private boolean isDead;
 
 	private int characterWidth;
 	private int characterHeight;
@@ -41,6 +42,7 @@ public class Player {
 	{
 		this.batch = batch;
 		this.factory = factory;
+		isDead = false;
 		texture = new Texture("player/normal.png");
 		characterWidth = texture.getWidth();
 		characterHeight = texture.getHeight();
@@ -94,6 +96,16 @@ public class Player {
 			}
 		}
 	}
+	
+	public boolean isDead()
+	{
+		return isDead;
+	}
+	
+	public void kill()
+	{
+		isDead = true;
+	}
 
 	public void enableBullet()
 	{
@@ -127,5 +139,16 @@ public class Player {
 		{
 			b.dispose();
 		}
+	}
+	
+	public void restart()
+	{
+		bullets.clear();
+		posX = MyGdxGame.WIDTH/2 - characterWidth/2;
+		posY = START_HEIGHT;
+		collisionBox.setX(posX);
+		collisionBox.setY(posY);
+		
+		isDead = false;
 	}
 }
