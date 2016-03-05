@@ -41,7 +41,7 @@ public abstract class Bullet {
 	
 	public void updateCollisionBox(int speed)
 	{
-		collisionBox.setHeight(collisionBox.getHeight() - speed);
+		collisionBox.setY(collisionBox.getY() - speed);
 	}
 	
 	public Rectangle getCollisionBox()

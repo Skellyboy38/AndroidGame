@@ -9,6 +9,7 @@ import bullets.BulletFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
 
 public class Player {
@@ -28,6 +29,7 @@ public class Player {
 	private BulletFactory factory;
 	private ArrayList<Bullet> bullets;
 	private String bulletType;
+	private Rectangle collisionBox;
 
 	private int characterWidth;
 	private int characterHeight;
@@ -47,6 +49,7 @@ public class Player {
 		bullets = new ArrayList<Bullet>();
 		bulletType = "default";
 		canSpawnBullet = true;
+		collisionBox = new Rectangle(posX, posY, characterWidth, characterHeight);
 	}
 
 	public void update()
@@ -55,10 +58,12 @@ public class Player {
 
 		if(Gdx.input.isKeyPressed(LEFT_KEY) && posX > 0)
 		{
+			collisionBox.setX(collisionBox.getX() - SPEED);
 			posX -= SPEED;
 		}
 		if(Gdx.input.isKeyPressed(RIGHT_KEY) && (posX + characterWidth) < MyGdxGame.WIDTH)
 		{
+			collisionBox.setX(collisionBox.getX() + SPEED);
 			posX += SPEED;
 		}
 		if(Gdx.input.isKeyPressed(LEFT_KEY) && Gdx.input.isKeyPressed(RIGHT_KEY) && canSpawnBullet)
@@ -96,14 +101,6 @@ public class Player {
 		{
 			canSpawnBullet = true;
 		}
-
-		/*
-		elapsedTime += Gdx.graphics.getDeltaTime();
-		if(elapsedTime >= BULLET_DELAY)
-		{
-			elapsedTime = 0;
-			canSpawnBullet = true;
-		}*/
 	}
 
 	public void spawnBullet(int x, int y)
@@ -111,5 +108,24 @@ public class Player {
 		Bullet bullet = factory.CreateBullet(bulletType, x, y);
 
 		bullets.add(bullet);
+	}
+	
+	public ArrayList<Bullet> getBullets()
+	{
+		return bullets;
+	}
+	
+	public Rectangle getCollisionBox()
+	{
+		return collisionBox;
+	}
+	
+	public void dispose()
+	{
+		texture.dispose();
+		for(Bullet b : bullets)
+		{
+			b.dispose();
+		}
 	}
 }

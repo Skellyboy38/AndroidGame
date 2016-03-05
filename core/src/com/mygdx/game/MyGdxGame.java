@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import Characters.Player;
 import bullets.BulletFactory;
+import collisionDetection.CollisionDetector;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -21,14 +22,15 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	float elapsedTime;
 	boolean canSpawnEnemy;
-	
+
 	SpriteBatch batch;
 	Player player;
 	BulletFactory bulletFactory;
 	EnemyFactory enemyFactory;
-	
+	CollisionDetector collisions;
+
 	ArrayList<Enemy> enemies;
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -36,7 +38,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		enemyFactory = new EnemyFactory();
 		player = new Player(batch, bulletFactory);
 		enemies = new ArrayList<Enemy>();
-		
+		collisions = new CollisionDetector(player, enemies);
+
 		canSpawnEnemy = true;
 		elapsedTime = 0f;
 	}
@@ -45,12 +48,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
+		checkCollisions();
+
 		spawnEnemy();
-		
+
 		batch.begin();
 		player.render();
-		
+
 		Iterator<Enemy> iter = enemies.iterator();
 		while(iter.hasNext())
 		{
@@ -66,10 +71,10 @@ public class MyGdxGame extends ApplicationAdapter {
 				batch.draw(e.getTexture(), e.getX(), e.getY());
 			}
 		}
-		
+
 		batch.end();
 	}
-	
+
 	public void spawnEnemy()
 	{
 		elapsedTime += Gdx.graphics.getDeltaTime();
@@ -79,5 +84,19 @@ public class MyGdxGame extends ApplicationAdapter {
 			enemies.add(e);
 			elapsedTime = 0;
 		}
+	}
+
+	public void checkCollisions()
+	{
+		collisions.update();
+		if(collisions.isGameOver())
+		{
+			clear();
+		}
+	}
+
+	public void clear()
+	{
+		
 	}
 }

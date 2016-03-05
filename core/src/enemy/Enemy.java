@@ -65,7 +65,7 @@ public abstract class Enemy {
 	
 	public void updateCollisionBox(int speed)
 	{
-		collisionBox.setHeight(collisionBox.getHeight() - speed);
+		collisionBox.setY(collisionBox.getY() - speed);
 	}
 	
 	abstract public void update();

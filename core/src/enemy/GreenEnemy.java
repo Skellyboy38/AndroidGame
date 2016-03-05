@@ -15,7 +15,7 @@ public class GreenEnemy extends Enemy{
 	@Override
 	public void update()
 	{
-		posY -= SPEED;
 		updateCollisionBox(SPEED);
+		posY -= SPEED;
 	}
 }
