@@ -8,7 +8,7 @@ public class DefaultBullet extends Bullet {
 	
 	public DefaultBullet(Texture texture, int posX, int posY) 
 	{
-		super(texture, posX, posY);
+		super(texture, posX, posY, 1);
 	}
 	
 	@Override

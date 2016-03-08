@@ -112,7 +112,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			{
 				PowerUp p = iter2.next();
 				p.update();
-				if(p.getY() < (-1)*p.getHeight())
+				if(p.getY() < (-1)*p.getHeight() || p.isDead())
 				{
 					p.dispose();
 					iter2.remove();

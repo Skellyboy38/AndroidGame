@@ -11,14 +11,21 @@ public abstract class Bullet {
 	
 	private boolean kill;
 	private Texture texture;
+	private int damage;
 	
-	public Bullet(Texture texture, int posX, int posY)
+	public Bullet(Texture texture, int posX, int posY, int damage)
 	{
 		this.texture = texture;
 		this.posX = posX;
 		this.posY = posY;
 		kill = false;
 		collisionBox = new Rectangle(posX, posY, texture.getWidth(), texture.getHeight());
+		this.damage = damage;
+	}
+	
+	public int getDamage()
+	{
+		return damage;
 	}
 	
 	public void kill()

@@ -36,8 +36,11 @@ public class CollisionDetector {
 	{
 		for(PowerUp p : powerUps)
 		{
-			if(Intersector.overlaps(p.getCollisionBox(), player.getCollisionBox()));
-			player.powerUp(p.getType());
+			if(Intersector.overlaps(p.getCollisionBox(), player.getCollisionBox()))
+			{
+				player.powerUp(p.getType());
+				p.kill();
+			}
 		}
 	}
 

@@ -21,6 +21,11 @@ public class Player {
 	public static final int START_HEIGHT = 100;
 
 	public static final float BULLET_DELAY = 0.1f;
+	
+	public static final Texture DEFAULT = new Texture("player/normal.png");
+	public static final Texture RED = new Texture("player/red.png");
+	public static final Texture GREEN = new Texture("player/green.png");
+	public static final Texture BLUE = new Texture("player/blue.png");
 
 	private boolean canSpawnBullet;
 
@@ -43,7 +48,7 @@ public class Player {
 		this.batch = batch;
 		this.factory = factory;
 		isDead = false;
-		texture = new Texture("player/normal.png");
+		texture = DEFAULT;
 		characterWidth = texture.getWidth();
 		characterHeight = texture.getHeight();
 		posX = MyGdxGame.WIDTH/2 - characterWidth/2;
@@ -70,7 +75,7 @@ public class Player {
 		}
 		if(Gdx.input.isKeyPressed(LEFT_KEY) && Gdx.input.isKeyPressed(RIGHT_KEY) && canSpawnBullet)
 		{
-			spawnBullet(posX + characterWidth/2, posY + characterHeight);
+			spawnBullet(posX + characterWidth/2, posY + characterHeight, bulletType);
 			canSpawnBullet = false;
 		}
 	}
@@ -115,9 +120,9 @@ public class Player {
 		}
 	}
 
-	public void spawnBullet(int x, int y)
+	public void spawnBullet(int x, int y, String type)
 	{
-		Bullet bullet = factory.CreateBullet(bulletType, x, y);
+		Bullet bullet = factory.CreateBullet(type, x, y);
 
 		bullets.add(bullet);
 	}
@@ -148,12 +153,23 @@ public class Player {
 		posY = START_HEIGHT;
 		collisionBox.setX(posX);
 		collisionBox.setY(posY);
-		
+		texture = DEFAULT;
 		isDead = false;
 	}
 	
 	public void powerUp(String type)
 	{
-		
+		if(type.equals("red"))
+		{
+			texture = RED;
+		}
+		else if(type.equals("green"))
+		{
+			texture = GREEN;
+		}
+		else if(type.equals("blue"))
+		{
+			texture = BLUE;
+		}
 	}
 }

@@ -12,6 +12,7 @@ public abstract class PowerUp {
 	protected Rectangle collisionBox;
 	
 	private String type;
+	private boolean isDead;
 
 	private int height;
 
@@ -23,6 +24,7 @@ public abstract class PowerUp {
 		height = texture.getHeight();
 		collisionBox = new Rectangle(posX, posY, texture.getWidth(), height);
 		this.type = type;
+		isDead = false;
 	}
 	
 	public String getType()
@@ -43,6 +45,16 @@ public abstract class PowerUp {
 	public void updateCollisionBox(int speed)
 	{
 		collisionBox.setY(collisionBox.getY() - speed);
+	}
+	
+	public void kill()
+	{
+		isDead = true;
+	}
+	
+	public boolean isDead()
+	{
+		return isDead;
 	}
 	
 	public int getX()
