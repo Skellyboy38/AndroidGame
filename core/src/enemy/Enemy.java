@@ -56,7 +56,10 @@ public abstract class Enemy {
 	public void hit()
 	{
 		isHit = true;
-		hp--;
+		if(hp > 0)
+		{
+			hp--;
+		}
 	}
 
 	public boolean isDead()
