@@ -28,7 +28,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public static final int HEIGHT = 560;
 	public static final float SPAWN_DELAY = 0.2f;
 	public static final float WALL_DELAY = 5f;
-	public static final double POWER_UP_CHANCE = 0.5;
+	public static final float POWER_UP_CHANCE = 0.2f;
 
 	float enemyTime, wallTime;
 	boolean canSpawnEnemy;
@@ -156,7 +156,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void spawnPowerUp(int posX, int posY)
 	{
 		powerUpChance = random.nextDouble();
-		if(powerUpChance > POWER_UP_CHANCE)
+		if(powerUpChance <= POWER_UP_CHANCE)
 		{
 			powerUps.add(powerUpFactory.createPowerUp(posX, posY));
 		}
