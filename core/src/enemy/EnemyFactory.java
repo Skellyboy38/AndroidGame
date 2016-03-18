@@ -9,6 +9,8 @@ public class EnemyFactory {
 	
 	private Random random;
 	private int spawnLocationX;
+	private int firstWallSpawnX, secondWallSpawnX;
+	public static final int WALL_GAP = 60;
 	private String type;
 	public static final String[] TYPES = {"pink", "green"};
 
@@ -35,5 +37,13 @@ public class EnemyFactory {
 		}
 		else
 			return null;
+	}
+	
+	public Enemy[] createWall()
+	{
+		Texture wall = new Texture("enemy/wall.png");
+		firstWallSpawnX = random.nextInt(MyGdxGame.WIDTH - WALL_GAP) - wall.getWidth();
+		secondWallSpawnX = firstWallSpawnX + WALL_GAP + wall.getWidth();
+		return new Enemy[] {new Wall(new Texture("enemy/wall.png"), new Texture("enemy/wall_hit.png"), firstWallSpawnX, MyGdxGame.HEIGHT), new Wall(wall, new Texture("enemy/wall_hit.png"), secondWallSpawnX, MyGdxGame.HEIGHT) };
 	}
 }

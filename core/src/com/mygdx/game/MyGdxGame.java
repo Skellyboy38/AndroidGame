@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -25,9 +27,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 560;
 	public static final float SPAWN_DELAY = 0.2f;
+	public static final float WALL_DELAY = 5f;
 	public static final double POWER_UP_CHANCE = 0.5;
 
-	float elapsedTime;
+	float enemyTime, wallTime;
 	boolean canSpawnEnemy;
 	HpNumbers hp;
 	Random random;
@@ -66,7 +69,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		hp = new HpNumbers();
 
 		canSpawnEnemy = true;
-		elapsedTime = 0f;
+		enemyTime = 0f;
+		wallTime = 0f;
 	}
 
 	@Override
@@ -135,12 +139,17 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	public void spawnEnemy()
 	{
-		elapsedTime += Gdx.graphics.getDeltaTime();
-		if(elapsedTime >= SPAWN_DELAY)
+		enemyTime += Gdx.graphics.getDeltaTime();
+		wallTime += Gdx.graphics.getDeltaTime();
+		if(enemyTime >= SPAWN_DELAY)
 		{
-			Enemy e = enemyFactory.createEnemy();
-			enemies.add(e);
-			elapsedTime = 0;
+			enemies.add(enemyFactory.createEnemy());
+			enemyTime = 0;
+		}
+		if(wallTime >= WALL_DELAY)
+		{
+			enemies.addAll(new HashSet<Enemy>(Arrays.asList(enemyFactory.createWall())));
+			wallTime = 0;
 		}
 	}
 	
