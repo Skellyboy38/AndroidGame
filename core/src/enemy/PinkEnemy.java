@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class PinkEnemy extends Enemy {
 
-	public static final int SPEED = 3;
-	public static final int HP = 5;
+	public static final int SPEED = 5;
+	public static final int HP = 3;
 	public static final int POINTS = 150;
 
 	public PinkEnemy(Texture texture, Texture hit, int posX, int posY) 

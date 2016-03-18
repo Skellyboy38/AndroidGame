@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class BlueBullet extends PowerUp {
 
-	public static final int SPEED = 1;
+	public static final int SPEED = 2;
 
 	public BlueBullet(Texture texture, int posX, int posY) 
 	{

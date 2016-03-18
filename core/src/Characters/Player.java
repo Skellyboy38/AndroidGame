@@ -16,6 +16,7 @@ public class Player {
 
 	public static final int LEFT_KEY = 21;
 	public static final int RIGHT_KEY = 22;
+	public static final int SPACE_KEY = 62;
 
 	public static final int SPEED = 4;
 	public static final int START_HEIGHT = 100;
@@ -73,7 +74,7 @@ public class Player {
 			collisionBox.setX(collisionBox.getX() + SPEED);
 			posX += SPEED;
 		}
-		if(Gdx.input.isKeyPressed(LEFT_KEY) && Gdx.input.isKeyPressed(RIGHT_KEY) && canSpawnBullet)
+		if(Gdx.input.isKeyPressed(SPACE_KEY) && canSpawnBullet)
 		{
 			spawnBullet(posX + characterWidth/2, posY + characterHeight, bulletType);
 			canSpawnBullet = false;
@@ -114,7 +115,7 @@ public class Player {
 
 	public void enableBullet()
 	{
-		if(!Gdx.input.isKeyPressed(LEFT_KEY) || !Gdx.input.isKeyPressed(RIGHT_KEY))
+		if(!Gdx.input.isKeyPressed(SPACE_KEY))
 		{
 			canSpawnBullet = true;
 		}
