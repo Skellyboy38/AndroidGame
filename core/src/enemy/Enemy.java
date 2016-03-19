@@ -53,12 +53,16 @@ public abstract class Enemy {
 		return posY;
 	}
 
-	public void hit()
+	public void hit(int damage)
 	{
 		isHit = true;
-		if(hp > 0)
+		if(hp - damage < 0)
 		{
-			hp--;
+			hp = 0;
+		}
+		else
+		{
+			hp -= damage;
 		}
 	}
 

@@ -64,7 +64,7 @@ public class CollisionDetector {
 				if(Intersector.overlaps(b.getCollisionBox(), e.getCollisionBox()))
 				{
 					b.kill();
-					e.hit();
+					e.hit(b.getDamage());
 				}
 			}
 		}

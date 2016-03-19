@@ -156,6 +156,7 @@ public class Player {
 		collisionBox.setY(posY);
 		texture = DEFAULT;
 		isDead = false;
+		bulletType = "default";
 	}
 	
 	public void powerUp(String type)
