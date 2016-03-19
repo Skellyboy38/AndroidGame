@@ -6,6 +6,7 @@ import powerUps.PowerUp;
 
 import com.badlogic.gdx.math.Intersector;
 
+import bullets.BlueBullet;
 import bullets.Bullet;
 import enemy.Enemy;
 import Characters.Player;
@@ -63,8 +64,18 @@ public class CollisionDetector {
 			{
 				if(Intersector.overlaps(b.getCollisionBox(), e.getCollisionBox()))
 				{
-					b.kill();
-					e.hit(b.getDamage());
+					if(b instanceof BlueBullet)
+					{
+						if(b.canHit())
+						{
+							e.hit(b.getDamage());
+						}
+					}
+					else
+					{
+						b.kill();
+						e.hit(b.getDamage());
+					}
 				}
 			}
 		}

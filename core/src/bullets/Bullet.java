@@ -69,4 +69,5 @@ public abstract class Bullet {
 	}
 	
 	abstract public void update();
+	abstract public boolean canHit();
 }

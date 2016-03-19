@@ -172,6 +172,7 @@ public class Player {
 		texture = DEFAULT;
 		isDead = false;
 		bulletType = "default";
+		level = 1;
 	}
 	
 	public void powerUp(String type)
@@ -204,7 +205,7 @@ public class Player {
 			{
 				texture = BLUE;
 				resetLevel();
-				this.bulletType = "default";
+				this.bulletType = type;
 			}
 			else
 				levelUp();

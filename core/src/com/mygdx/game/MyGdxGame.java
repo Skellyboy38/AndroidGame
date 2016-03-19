@@ -85,8 +85,6 @@ public class MyGdxGame extends ApplicationAdapter {
 
 			spawnEnemy();
 
-			player.render();
-
 			Iterator<Enemy> iter = enemies.iterator();
 			while(iter.hasNext())
 			{
@@ -129,6 +127,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 			font.draw(batch, score.getScore(), 10, 540);
 			font.draw(batch, "Power: " +player.getLevel(), 10, 510);
+			
+			player.render();
 		}
 		else
 		{

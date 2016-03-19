@@ -15,5 +15,9 @@ public class RedBullet extends Bullet {
 		posY += SPEED;
 		updateCollisionBox(SPEED);
 	}
-
+	
+	@Override
+	public boolean canHit() {
+		return true;
+	}
 }

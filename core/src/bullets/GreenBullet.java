@@ -16,4 +16,8 @@ public class GreenBullet extends Bullet {
 		updateCollisionBox(SPEED);
 	}
 
+	@Override
+	public boolean canHit() {
+		return true;
+	}
 }

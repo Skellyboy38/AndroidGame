@@ -16,7 +16,7 @@ public class BulletFactory {
 	{
 		if(type.equals("default"))
 		{
-			return new HashSet<Bullet>(Arrays.asList(new RedBullet(new Texture("bullet/default.png"), x, y, 1)));
+			return new HashSet<Bullet>(Arrays.asList(new DefaultBullet(new Texture("bullet/default.png"), x, y)));
 		}
 		else if(type.equals("red"))
 		{
@@ -55,6 +55,10 @@ public class BulletFactory {
 						new GreenBullet(new Texture("bullet/green/1.png"), x + 44, y, 1 + (int)(level/2))
 								));
 			}
+		}
+		else if(type.equals("blue"))
+		{
+			return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/1.png"), x, y, 1 + (int)(level/4))));
 		}
 		else
 			return null;
