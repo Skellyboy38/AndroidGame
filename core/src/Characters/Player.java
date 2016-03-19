@@ -140,9 +140,7 @@ public class Player {
 
 	public void spawnBullet(int x, int y, String type)
 	{
-		Bullet bullet = factory.CreateBullet(type, x, y, level);
-
-		bullets.add(bullet);
+		bullets.addAll(factory.CreateBullet(type, x, y, level));
 	}
 	
 	public ArrayList<Bullet> getBullets()
@@ -195,8 +193,10 @@ public class Player {
 			{
 				texture = GREEN;
 				resetLevel();
-				this.bulletType = "default";
+				this.bulletType = type;
 			}
+			else
+				levelUp();
 		}
 		else if(type.equals("blue"))
 		{
@@ -206,6 +206,8 @@ public class Player {
 				resetLevel();
 				this.bulletType = "default";
 			}
+			else
+				levelUp();
 		}
 	}
 }
