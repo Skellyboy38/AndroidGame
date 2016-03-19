@@ -26,7 +26,7 @@ import enemy.EnemyFactory;
 public class MyGdxGame extends ApplicationAdapter {
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 560;
-	public static final float SPAWN_DELAY = 0.2f;
+	public static final float SPAWN_DELAY = 0.25f;
 	public static final float WALL_DELAY = 5f;
 	public static final float POWER_UP_CHANCE = 0.2f;
 
