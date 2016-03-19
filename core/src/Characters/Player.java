@@ -29,6 +29,7 @@ public class Player {
 	public static final Texture BLUE = new Texture("player/blue.png");
 
 	private boolean canSpawnBullet;
+	private int level;
 
 	private Texture texture;
 	private SpriteBatch batch;
@@ -58,6 +59,7 @@ public class Player {
 		bulletType = "default";
 		canSpawnBullet = true;
 		collisionBox = new Rectangle(posX, posY, characterWidth, characterHeight);
+		level = 1;
 	}
 
 	public void update()
@@ -79,6 +81,21 @@ public class Player {
 			spawnBullet(posX + characterWidth/2, posY + characterHeight, bulletType);
 			canSpawnBullet = false;
 		}
+	}
+	
+	public void levelUp()
+	{
+		level++;
+	}
+	
+	public int getLevel()
+	{
+		return level;
+	}
+	
+	public void resetLevel()
+	{
+		level = 1;
 	}
 
 	public void render()
@@ -123,7 +140,7 @@ public class Player {
 
 	public void spawnBullet(int x, int y, String type)
 	{
-		Bullet bullet = factory.CreateBullet(type, x, y);
+		Bullet bullet = factory.CreateBullet(type, x, y, level);
 
 		bullets.add(bullet);
 	}
@@ -163,15 +180,32 @@ public class Player {
 	{
 		if(type.equals("red"))
 		{
-			texture = RED;
+			if(!bulletType.equals(type))
+			{
+				texture = RED;
+				resetLevel();
+				this.bulletType = type;
+			}
+			else
+				levelUp();
 		}
 		else if(type.equals("green"))
 		{
-			texture = GREEN;
+			if(!bulletType.equals(type))
+			{
+				texture = GREEN;
+				resetLevel();
+				this.bulletType = "default";
+			}
 		}
 		else if(type.equals("blue"))
 		{
-			texture = BLUE;
+			if(!bulletType.equals(type))
+			{
+				texture = BLUE;
+				resetLevel();
+				this.bulletType = "default";
+			}
 		}
 	}
 }

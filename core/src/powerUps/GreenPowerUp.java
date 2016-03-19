@@ -2,13 +2,13 @@ package powerUps;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class RedBullet extends PowerUp {
-	
+public class GreenPowerUp extends PowerUp {
+
 	public static final int SPEED = 2;
 
-	public RedBullet(Texture texture, int posX, int posY) 
+	public GreenPowerUp(Texture texture, int posX, int posY) 
 	{
-		super(texture, posX, posY, "red");
+		super(texture, posX, posY, "green");
 	}
 
 	@Override

@@ -22,15 +22,15 @@ public class PowerUpFactory {
 		
 		if(type.equals("red"))
 		{
-			return new RedBullet(new Texture("powers/red.png"), posX, posY);
+			return new RedPowerUp(new Texture("powers/red.png"), posX, posY);
 		}
 		else if(type.equals("blue"))
 		{
-			return new BlueBullet(new Texture("powers/blue.png"), posX, posY);
+			return new BluePowerUp(new Texture("powers/blue.png"), posX, posY);
 		}
 		else if(type.equals("green"))
 		{
-			return new GreenBullet(new Texture("powers/green.png"), posX, posY);
+			return new GreenPowerUp(new Texture("powers/green.png"), posX, posY);
 		}
 		else
 			return null;
