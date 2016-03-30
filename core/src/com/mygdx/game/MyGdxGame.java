@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,10 +25,10 @@ import enemy.Enemy;
 import enemy.EnemyFactory;
 
 public class MyGdxGame extends ApplicationAdapter {
-	public static final int WIDTH = 320;
-	public static final int HEIGHT = 560;
-	public static final float SPAWN_DELAY = 0.25f;
-	public static final float WALL_DELAY = 5f;
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 1120;
+	public static final float SPAWN_DELAY = 0.05f;
+	public static final float WALL_DELAY = 3f;
 	public static final float POWER_UP_CHANCE = 0.2f;
 
 	float enemyTime, wallTime;
@@ -35,6 +36,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	HpNumbers hp;
 	Random random;
 	double powerUpChance;
+	float totalGameTime;
+	DecimalFormat format;
 
 	SpriteBatch batch;
 	BitmapFont font;
@@ -51,11 +54,13 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		totalGameTime = 0;
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(1,1,1,1);
 		font.setScale(2);
 		random = new Random();
+		format = new DecimalFormat("#.##");
 		
 		bulletFactory = new BulletFactory();
 		enemyFactory = new EnemyFactory();
@@ -78,6 +83,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		if(!player.isDead())
 		{
+			totalGameTime += Gdx.graphics.getDeltaTime();
 			Gdx.gl.glClearColor(1, 1, 1, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -127,6 +133,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 			font.draw(batch, score.getScore(), 10, 540);
 			font.draw(batch, "Power: " +player.getLevel(), 10, 510);
+			font.draw(batch, "Time: " + format.format(totalGameTime), 10, 480);
 			
 			player.render();
 		}
@@ -168,8 +175,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		font.draw(batch, "Game over", 10, 420);
-		font.draw(batch, score.getScore(), 10, 380);
-		font.draw(batch, "Play again? (enter)", 10, 340);
+		font.draw(batch, score.getScore(), 10, 390);
+		font.draw(batch, "Time: " + format.format(totalGameTime), 10, 360);
+		font.draw(batch, "Play again? (enter)", 10, 330);
 		
 		if(Gdx.input.isKeyPressed(66))
 		{
@@ -183,5 +191,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		player.restart();
 		enemies.clear();
 		powerUps.clear();
+		totalGameTime = 0;
 	}
 }

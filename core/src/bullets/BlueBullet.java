@@ -6,21 +6,22 @@ import com.badlogic.gdx.graphics.Texture;
 public class BlueBullet extends Bullet {
 	
 	public final static int SPEED = 1;
-	public final static int HIT_DELAY = 1;
+	public float hitDelay;
 	private float elapsedTime;
 	private boolean canHit;
 	private Texture texture;
 
-	public BlueBullet(Texture texture, Texture hitTexture, int posX, int posY, int damage) {
+	public BlueBullet(Texture texture, Texture hitTexture, int posX, int posY, int damage, float hitDelay) {
 		super(texture, posX, posY, damage);
 		canHit = false;
 		this.texture = hitTexture;
+		this.hitDelay = hitDelay;
 	}
 	
 	@Override
 	public Texture getTexture()
 	{
-		if(elapsedTime > HIT_DELAY)
+		if(elapsedTime > hitDelay)
 		{
 			return this.texture;
 		}
@@ -39,7 +40,7 @@ public class BlueBullet extends Bullet {
 	
 	public boolean canHit()
 	{
-		if(elapsedTime > HIT_DELAY)
+		if(elapsedTime > hitDelay)
 		{
 			elapsedTime = 0;
 			canHit = true;

@@ -60,23 +60,23 @@ public class BulletFactory {
 		{
 			if(level <= 3)
 			{
-				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/1.png"), new Texture("bullet/blue/1-hit.png"), x, y, 1 + (int)(level/4))));
+				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/1.png"), new Texture("bullet/blue/1-hit.png"), x, y, 1 + (int)(level/4), level*0.1f)));
 			}
 			else if(level <= 7)
 			{
-				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/2.png"), new Texture("bullet/blue/2-hit.png"), x, y, 1 + (int)(level/4))));
+				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/2.png"), new Texture("bullet/blue/2-hit.png"), x, y, 1 + (int)(level/4), level*0.1f)));
 			}
 			else if(level <= 11)
 			{
-				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/3.png"), new Texture("bullet/blue/3-hit.png"), x, y, 1 + (int)(level/4))));
+				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/3.png"), new Texture("bullet/blue/3-hit.png"), x, y, 1 + (int)(level/4), level*0.1f)));
 			}
 			else if(level <= 15)
 			{
-				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/4.png"), new Texture("bullet/blue/4-hit.png"), x, y, 1 + (int)(level/4))));
+				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/4.png"), new Texture("bullet/blue/4-hit.png"), x, y, 1 + (int)(level/4), level*0.1f)));
 			}
 			else
 			{
-				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/5.png"), new Texture("bullet/blue/5-hit.png"), x, y, 1 + (int)(level/4))));
+				return new HashSet<Bullet>(Arrays.asList(new BlueBullet(new Texture("bullet/blue/5.png"), new Texture("bullet/blue/5-hit.png"), x, y, 1 + (int)(level/4), level*0.1f)));
 			}
 			
 		}
