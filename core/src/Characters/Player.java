@@ -17,6 +17,8 @@ public class Player {
 	public static final int LEFT_KEY = 21;
 	public static final int RIGHT_KEY = 22;
 	public static final int SPACE_KEY = 62;
+	public static final int UP_KEY = 19;
+	public static final int DOWN_KEY = 20;
 
 	public static final int SPEED = 4;
 	public static final int START_HEIGHT = 100;
@@ -75,6 +77,16 @@ public class Player {
 		{
 			collisionBox.setX(collisionBox.getX() + SPEED);
 			posX += SPEED;
+		}
+		if(Gdx.input.isKeyPressed(DOWN_KEY) && posY > 0)
+		{
+			collisionBox.setY(collisionBox.getY() - SPEED);
+			posY -= SPEED;
+		}
+		if(Gdx.input.isKeyPressed(UP_KEY) && posY < MyGdxGame.HEIGHT - texture.getHeight())
+		{
+			collisionBox.setY(collisionBox.getY() + SPEED);
+			posY += SPEED;
 		}
 		if(Gdx.input.isKeyPressed(SPACE_KEY) && canSpawnBullet)
 		{
@@ -173,6 +185,7 @@ public class Player {
 		isDead = false;
 		bulletType = "default";
 		level = 1;
+		posY = START_HEIGHT;
 	}
 	
 	public void powerUp(String type)
