@@ -26,12 +26,13 @@ import enemy.EnemyFactory;
 
 public class MyGdxGame extends ApplicationAdapter {
 	public static final int WIDTH = 640;
-	public static final int HEIGHT = 1120;
-	public static final float SPAWN_DELAY = 0.05f;
-	public static final float WALL_DELAY = 3f;
+	public static final int HEIGHT = 1000;
+	public static float spawn_delay = 1f;
+	public static final float WALL_DELAY = 5f;
 	public static final float POWER_UP_CHANCE = 0.2f;
+	public static final float SPEED_UP_TIME = 10f;
 
-	float enemyTime, wallTime;
+	float enemyTime, wallTime, speedUpTime;
 	boolean canSpawnEnemy;
 	HpNumbers hp;
 	Random random;
@@ -55,6 +56,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		totalGameTime = 0;
+		speedUpTime = 0;
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(1,1,1,1);
@@ -84,6 +86,14 @@ public class MyGdxGame extends ApplicationAdapter {
 		if(!player.isDead())
 		{
 			totalGameTime += Gdx.graphics.getDeltaTime();
+			speedUpTime += Gdx.graphics.getDeltaTime();
+			
+			if(speedUpTime > SPEED_UP_TIME)
+			{
+				speedUpTime = 0;
+				speedUp();
+			}
+			
 			Gdx.gl.glClearColor(1, 1, 1, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -149,7 +159,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	{
 		enemyTime += Gdx.graphics.getDeltaTime();
 		wallTime += Gdx.graphics.getDeltaTime();
-		if(enemyTime >= SPAWN_DELAY)
+		if(enemyTime >= spawn_delay)
 		{
 			enemies.add(enemyFactory.createEnemy());
 			enemyTime = 0;
@@ -185,6 +195,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 	}
 	
+	public void speedUp()
+	{
+		spawn_delay /= 2;
+	}
+	
 	public void restart()
 	{
 		score.restart();
@@ -192,5 +207,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		enemies.clear();
 		powerUps.clear();
 		totalGameTime = 0;
+		speedUpTime = 0;
 	}
 }
