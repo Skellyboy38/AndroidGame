@@ -208,5 +208,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		powerUps.clear();
 		totalGameTime = 0;
 		speedUpTime = 0;
+		spawn_delay = 1f;
 	}
 }
